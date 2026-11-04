@@ -1,93 +1,295 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MPS Projects — Student Project Showcase</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MPS Global School | Exhibition</title>
+
+    <meta name="description" content="Explore student projects and exhibitions at MPS Global School.">
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <p class="eyebrow">A record of what we built</p>
-      <h1>MPS Projects</h1>
-      <p class="subhead">This website is also created as a project for the school MPS Udaan Mela 2026 by the student of grade 6-Ankush , grade 7-Alpeksh, grade 11 - Ashi , grade 11 - Dolly .</p>
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="container">
+
+            <h1>MPS GLOBAL SCHOOL</h1>
+
+            <p>Student Exhibition & Innovation Gallery</p>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN SECTION -->
+
+    <main class="container">
+
+        <section class="hero">
+
+            <h2>Explore Our Student Projects</h2>
+
+            <p>
+                Discover creativity, innovation and learning
+                through our students' exhibition projects.
+            </p>
+
+            <button id="openUploadBtn" type="button">
+                + Upload Project
+            </button>
+
+        </section>
+
+
+        <!-- CATEGORY FILTERS -->
+
+        <section class="filters">
+
+            <div id="categoryTabs">
+
+                <button
+                    class="tab active"
+                    data-category="all"
+                    type="button">
+                    All Projects
+                </button>
+
+                <button
+                    class="tab"
+                    data-category="Science"
+                    type="button">
+                    Science
+                </button>
+
+                <button
+                    class="tab"
+                    data-category="S.studies"
+                    type="button">
+                    Social Studies
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT GRID -->
+
+        <section class="projects-section">
+
+            <div id="projectGrid" class="project-grid">
+
+                <!-- Projects are loaded by script.js -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- VIDEO DETAIL MODAL -->
+
+    <div
+        id="detailBackdrop"
+        class="modal-backdrop"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="detailTitle"
+    >
+
+        <div class="modal detail-modal">
+
+            <button
+                id="closeDetailBtn"
+                class="close-btn"
+                type="button"
+                aria-label="Close video">
+                &times;
+            </button>
+
+            <div class="video-container">
+
+                <video
+                    id="detailVideo"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    style="width:100%; height:auto;"
+                >
+                    Your browser does not support video playback.
+                </video>
+
+            </div>
+
+            <div class="detail-content">
+
+                <span
+                    id="detailCategory"
+                    class="tag-label">
+                </span>
+
+                <h2 id="detailTitle"></h2>
+
+                <p
+                    id="detailStudent"
+                    class="byline">
+                </p>
+
+                <p
+                    id="detailDescription"
+                    class="description">
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
-  </header>
 
-  <main>
-    <section class="controls">
-      <div class="tabs" id="categoryTabs">
-        <button class="tab active" data-category="all">All Exhibits</button>
-        <button class="tab" data-category="Science">Science</button>
-        <button class="tab" data-category="S.studies">S.studies</button>
-        
-      </div>
-      <button class="add-btn" id="openUploadBtn">+ Add your project</button>
-    </section>
 
-    <section class="grid" id="projectGrid"></section>
-  </main>
+    <!-- UPLOAD PROJECT MODAL -->
 
-  <!-- Upload modal -->
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal">
-      <div class="modal-head">
-        <span class="tag-label">New Exhibit</span>
-        <button class="close-btn" id="closeUploadBtn" aria-label="Close">&times;</button>
-      </div>
-      <form id="uploadForm">
-        <label>
-          Project title
-          <input type="text" name="title" required placeholder="e.g. Baking-Soda Volcano">
-        </label>
-        <label>
-          Student name(s)
-          <input type="text" name="student" required placeholder="e.g. Aditi Sharma, Grade 8">
-        </label>
-        <label>
-          Category
-          <select name="category" required>
-            <option value="Science">Science</option>
-            <option value="Technology">Others</option>
-           
-          </select>
-        </label>
-        <label>
-          Description — how did you make it?
-          <textarea name="description" rows="4" required placeholder="Materials, steps, what you learned..."></textarea>
-        </label>
-        <label>
-          Project video
-          <input type="file" name="video" accept="video/*" required>
-        </label>
-        <p class="form-note">This demo saves new exhibits only for your current visit. Reloading the page resets the wall — wiring this form up to a server is what makes it stick permanently.</p>
-        <button type="submit" class="submit-btn">Pin to the wall</button>
-      </form>
+    <div
+        id="modalBackdrop"
+        class="modal-backdrop"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="uploadHeading"
+    >
+
+        <div class="modal upload-modal">
+
+            <button
+                id="closeUploadBtn"
+                class="close-btn"
+                type="button"
+                aria-label="Close upload form">
+                &times;
+            </button>
+
+            <h2 id="uploadHeading">Upload Student Project</h2>
+
+            <form id="uploadForm">
+
+                <label for="title">
+                    Project Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter project title"
+                    required
+                >
+
+                <label for="student">
+                    Student Names and Class
+                </label>
+
+                <input
+                    type="text"
+                    id="student"
+                    name="student"
+                    placeholder="Enter student names"
+                    required
+                >
+
+                <label for="category">
+                    Category
+                </label>
+
+                <select
+                    id="category"
+                    name="category"
+                    required
+                >
+
+                    <option value="Science">
+                        Science
+                    </option>
+
+                    <option value="S.studies">
+                        Social Studies
+                    </option>
+
+                </select>
+
+                <label for="description">
+                    Project Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe the project"
+                    required
+                ></textarea>
+
+                <label for="video">
+                    Select Project Video
+                </label>
+
+                <input
+                    type="file"
+                    id="video"
+                    name="video"
+                    accept="video/*"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+                    Add Project
+                </button>
+
+            </form>
+
+            <p class="upload-note">
+                Note: Uploaded videos are currently temporary previews.
+                Permanent cloud storage is not configured.
+            </p>
+
+        </div>
+
     </div>
-  </div>
 
-  <!-- Detail modal -->
-  <div class="modal-backdrop" id="detailBackdrop">
-    <div class="modal detail-modal">
-      <div class="modal-head">
-        <span class="tag-label" id="detailCategory">Science</span>
-        <button class="close-btn" id="closeDetailBtn" aria-label="Close">&times;</button>
-      </div>
-      <video id="detailVideo" controls></video>
-      <h2 id="detailTitle"></h2>
-      <p class="byline" id="detailStudent"></p>
-      <p class="description" id="detailDescription"></p>
-    </div>
-  </div>
 
-  <footer class="site-footer">
-    <p>Built for the school science fair &amp; project hall — every exhibit is a student's own work.</p>
-  </footer>
+    <!-- FOOTER -->
 
-<script src="script.js"></script>
+    <footer class="footer">
+
+        <div class="container">
+
+            <h3>MPS GLOBAL SCHOOL</h3>
+
+            <p>
+                Encouraging creativity, innovation and excellence.
+            </p>
+
+            <p>
+                &copy; 2026 MPS Global School. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js" defer></script>
+
 </body>
 </html>
