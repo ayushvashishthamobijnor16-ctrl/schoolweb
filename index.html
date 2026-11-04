@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPS Projects — Student Project Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">A record of what we built</p>
+      <h1>MPS Projects</h1>
+      <p class="subhead">This website is also created as a project for the school MPS Udaan Mela 2026 by the student of grade 6-Ankush , grade 7-Alpeksh, grade 11 - Ashi , grade 11 - Dolly .</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="tabs" id="categoryTabs">
+        <button class="tab active" data-category="all">All Exhibits</button>
+        <button class="tab" data-category="Science">Science</button>
+        <button class="tab" data-category="S.studies">S.studies</button>
+        
+      </div>
+      <button class="add-btn" id="openUploadBtn">+ Add your project</button>
+    </section>
+
+    <section class="grid" id="projectGrid"></section>
+  </main>
+
+  <!-- Upload modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-head">
+        <span class="tag-label">New Exhibit</span>
+        <button class="close-btn" id="closeUploadBtn" aria-label="Close">&times;</button>
+      </div>
+      <form id="uploadForm">
+        <label>
+          Project title
+          <input type="text" name="title" required placeholder="e.g. Baking-Soda Volcano">
+        </label>
+        <label>
+          Student name(s)
+          <input type="text" name="student" required placeholder="e.g. Aditi Sharma, Grade 8">
+        </label>
+        <label>
+          Category
+          <select name="category" required>
+            <option value="Science">Science</option>
+            <option value="Technology">Others</option>
+           
+          </select>
+        </label>
+        <label>
+          Description — how did you make it?
+          <textarea name="description" rows="4" required placeholder="Materials, steps, what you learned..."></textarea>
+        </label>
+        <label>
+          Project video
+          <input type="file" name="video" accept="video/*" required>
+        </label>
+        <p class="form-note">This demo saves new exhibits only for your current visit. Reloading the page resets the wall — wiring this form up to a server is what makes it stick permanently.</p>
+        <button type="submit" class="submit-btn">Pin to the wall</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detail modal -->
+  <div class="modal-backdrop" id="detailBackdrop">
+    <div class="modal detail-modal">
+      <div class="modal-head">
+        <span class="tag-label" id="detailCategory">Science</span>
+        <button class="close-btn" id="closeDetailBtn" aria-label="Close">&times;</button>
+      </div>
+      <video id="detailVideo" controls></video>
+      <h2 id="detailTitle"></h2>
+      <p class="byline" id="detailStudent"></p>
+      <p class="description" id="detailDescription"></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>Built for the school science fair &amp; project hall — every exhibit is a student's own work.</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
