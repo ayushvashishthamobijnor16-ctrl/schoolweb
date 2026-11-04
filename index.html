@@ -2,294 +2,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MPS Global School | Exhibition</title>
+<title>MPS Projects — Student Project Showcase</title>
 
-    <meta name="description" content="Explore student projects and exhibitions at MPS Global School.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
+<header class="site-header">
+    <div class="header-inner">
+        <p class="eyebrow">A record of what we built</p>
 
-    <header class="header">
+        <h1>MPS Projects</h1>
 
-        <div class="container">
-
-            <h1>MPS GLOBAL SCHOOL</h1>
-
-            <p>Student Exhibition & Innovation Gallery</p>
-
-        </div>
-
-    </header>
-
-
-    <!-- MAIN SECTION -->
-
-    <main class="container">
-
-        <section class="hero">
-
-            <h2>Explore Our Student Projects</h2>
-
-            <p>
-                Discover creativity, innovation and learning
-                through our students' exhibition projects.
-            </p>
-
-            <button id="openUploadBtn" type="button">
-                + Upload Project
-            </button>
-
-        </section>
-
-
-        <!-- CATEGORY FILTERS -->
-
-        <section class="filters">
-
-            <div id="categoryTabs">
-
-                <button
-                    class="tab active"
-                    data-category="all"
-                    type="button">
-                    All Projects
-                </button>
-
-                <button
-                    class="tab"
-                    data-category="Science"
-                    type="button">
-                    Science
-                </button>
-
-                <button
-                    class="tab"
-                    data-category="S.studies"
-                    type="button">
-                    Social Studies
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECT GRID -->
-
-        <section class="projects-section">
-
-            <div id="projectGrid" class="project-grid">
-
-                <!-- Projects are loaded by script.js -->
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- VIDEO DETAIL MODAL -->
-
-    <div
-        id="detailBackdrop"
-        class="modal-backdrop"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="detailTitle"
-    >
-
-        <div class="modal detail-modal">
-
-            <button
-                id="closeDetailBtn"
-                class="close-btn"
-                type="button"
-                aria-label="Close video">
-                &times;
-            </button>
-
-            <div class="video-container">
-
-                <video
-                    id="detailVideo"
-                    controls
-                    playsinline
-                    preload="metadata"
-                    style="width:100%; height:auto;"
-                >
-                    Your browser does not support video playback.
-                </video>
-
-            </div>
-
-            <div class="detail-content">
-
-                <span
-                    id="detailCategory"
-                    class="tag-label">
-                </span>
-
-                <h2 id="detailTitle"></h2>
-
-                <p
-                    id="detailStudent"
-                    class="byline">
-                </p>
-
-                <p
-                    id="detailDescription"
-                    class="description">
-                </p>
-
-            </div>
-
-        </div>
-
+        <p class="subhead">
+            This website is also created as a project for the school
+            MPS Udaan Mela 2026 by the student of grade 6-Ankush,
+            grade 7-Alpeksh, grade 11-Ashi, grade 11-Dolly.
+        </p>
     </div>
+</header>
+
+<main>
+
+    <section class="controls">
+
+        <div class="tabs" id="categoryTabs">
+
+            <button class="tab active" data-category="all" type="button">
+                All Exhibits
+            </button>
+
+            <button class="tab" data-category="Science" type="button">
+                Science
+            </button>
+
+            <button class="tab" data-category="S.studies" type="button">
+                S.studies
+            </button>
+
+        </div>
+
+        <button class="add-btn" id="openUploadBtn" type="button">
+            + Add your project
+        </button>
+
+    </section>
+
+    <section class="grid" id="projectGrid"></section>
+
+</main>
 
 
-    <!-- UPLOAD PROJECT MODAL -->
+<!-- Upload Modal -->
 
-    <div
-        id="modalBackdrop"
-        class="modal-backdrop"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="uploadHeading"
-    >
+<div class="modal-backdrop" id="modalBackdrop">
 
-        <div class="modal upload-modal">
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <span class="tag-label">New Exhibit</span>
 
             <button
-                id="closeUploadBtn"
                 class="close-btn"
+                id="closeUploadBtn"
                 type="button"
-                aria-label="Close upload form">
+                aria-label="Close">
                 &times;
             </button>
 
-            <h2 id="uploadHeading">Upload Student Project</h2>
+        </div>
 
-            <form id="uploadForm">
+        <form id="uploadForm">
 
-                <label for="title">
-                    Project Title
-                </label>
+            <label>
+                Project title
 
                 <input
                     type="text"
-                    id="title"
                     name="title"
-                    placeholder="Enter project title"
                     required
-                >
+                    placeholder="e.g. Baking-Soda Volcano">
+            </label>
 
-                <label for="student">
-                    Student Names and Class
-                </label>
+            <label>
+                Student name(s)
 
                 <input
                     type="text"
-                    id="student"
                     name="student"
-                    placeholder="Enter student names"
                     required
-                >
+                    placeholder="e.g. Aditi Sharma, Grade 8">
+            </label>
 
-                <label for="category">
-                    Category
-                </label>
+            <label>
+                Category
 
-                <select
-                    id="category"
-                    name="category"
-                    required
-                >
-
-                    <option value="Science">
-                        Science
-                    </option>
-
-                    <option value="S.studies">
-                        Social Studies
-                    </option>
-
+                <select name="category" required>
+                    <option value="Science">Science</option>
+                    <option value="S.studies">S.studies</option>
                 </select>
 
-                <label for="description">
-                    Project Description
-                </label>
+            </label>
+
+            <label>
+                Description — how did you make it?
 
                 <textarea
-                    id="description"
                     name="description"
-                    placeholder="Describe the project"
+                    rows="4"
                     required
-                ></textarea>
+                    placeholder="Materials, steps, what you learned...">
+                </textarea>
+            </label>
 
-                <label for="video">
-                    Select Project Video
-                </label>
+            <label>
+                Project video
 
                 <input
                     type="file"
-                    id="video"
                     name="video"
                     accept="video/*"
-                    required
-                >
+                    required>
+            </label>
 
-                <button
-                    type="submit"
-                    class="submit-btn">
-                    Add Project
-                </button>
-
-            </form>
-
-            <p class="upload-note">
-                Note: Uploaded videos are currently temporary previews.
-                Permanent cloud storage is not configured.
+            <p class="form-note">
+                This demo saves new exhibits only for your current visit.
+                Reloading the page resets the wall.
             </p>
 
-        </div>
+            <button type="submit" class="submit-btn">
+                Pin to the wall
+            </button>
+
+        </form>
 
     </div>
 
+</div>
 
-    <!-- FOOTER -->
 
-    <footer class="footer">
+<!-- Detail Modal -->
 
-        <div class="container">
+<div class="modal-backdrop" id="detailBackdrop">
 
-            <h3>MPS GLOBAL SCHOOL</h3>
+    <div class="modal detail-modal">
 
-            <p>
-                Encouraging creativity, innovation and excellence.
-            </p>
+        <div class="modal-head">
 
-            <p>
-                &copy; 2026 MPS Global School. All Rights Reserved.
-            </p>
+            <span class="tag-label" id="detailCategory">
+                Science
+            </span>
+
+            <button
+                class="close-btn"
+                id="closeDetailBtn"
+                type="button"
+                aria-label="Close">
+                &times;
+            </button>
 
         </div>
 
-    </footer>
+        <video
+            id="detailVideo"
+            controls
+            playsinline
+            preload="metadata">
+        </video>
+
+        <h2 id="detailTitle"></h2>
+
+        <p class="byline" id="detailStudent"></p>
+
+        <p class="description" id="detailDescription"></p>
+
+    </div>
+
+</div>
 
 
-    <!-- JAVASCRIPT -->
+<footer class="site-footer">
 
-    <script src="script.js" defer></script>
+    <p>
+        Built for the school science fair &amp; project hall —
+        every exhibit is a student's own work.
+    </p>
+
+</footer>
+
+
+<script src="script.js" defer></script>
 
 </body>
 </html>
