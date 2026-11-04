@@ -1,99 +1,108 @@
 
-// ---- Sample Exhibits ----
-
 const projects = [
   {
     title: "Respiratory System Model",
     student: "Ashma, Divya, Shivika — Grade 7",
     category: "Science",
     description: "A model of the human respiratory system built from everyday materials. Demonstrates how air flows through the lungs and how the diaphragm assists in breathing.",
-    video: "/videos/respiratory%20system.mp4",
+    video: "/videos/respiratory%20system.mp4"
   },
   {
     title: "Hemodialysis",
     student: "Angel, Vidushi — Grade 9",
     category: "Science",
-    description: "Hemodialysis is a medical procedure that uses a machine and a special filter called an artificial kidney to clean toxins, waste products, and excess fluids from the blood.",
-    video: "/videos/hemodialysis.mp4",
+    description: "Hemodialysis uses a machine and a special filter called an artificial kidney to clean toxins, waste products and excess fluids from the blood.",
+    video: "/videos/hemodialysis.mp4"
   },
   {
     title: "Water Cycle Model",
     student: "Shorya, Divyanshu — Grade 7",
     category: "Science",
-    description: "A model demonstrating the water cycle, including evaporation, condensation, and precipitation.",
-    video: "/videos/water%20cycle.mp4",
+    description: "A model demonstrating evaporation, condensation and precipitation.",
+    video: "/videos/water%20cycle.mp4"
   },
   {
     title: "Acid Rain",
     student: "Shagun, Mahi, Pari, Yashvi — Grade 8",
     category: "Science",
-    description: "A model demonstrating the effects of acid rain on the environment, including its impact on plants and aquatic ecosystems.",
-    video: "/videos/acidrain.mp4",
+    description: "A model demonstrating the effects of acid rain on plants and aquatic ecosystems.",
+    video: "/videos/acidrain.mp4"
   },
   {
     title: "Water Dam Model",
     student: "Anubhav, Ashfahad, Harsh, Shubh, Vansh — Grade 9",
     category: "Science",
-    description: "A model demonstrating the effects of water dams on the environment, including their impact on local ecosystems.",
-    video: "/videos/water%20dam.mp4",
+    description: "A model demonstrating the effects of water dams on the environment.",
+    video: "/videos/water%20dam.mp4"
   },
   {
     title: "Day and Night Model",
     student: "Shadan — Grade 6",
     category: "Science",
-    description: "A model demonstrating the effects of the earth's rotation on the cycle of day and night.",
-    video: "/videos/dayandnight.mp4",
+    description: "A model demonstrating how Earth's rotation creates day and night.",
+    video: "/videos/dayandnight.mp4"
   },
   {
     title: "Sources of Indian History and Volcano",
     student: "Aditi, Divya, Ashma, Shivika — Grade 7",
     category: "S.studies",
-    description: "A model demonstrating the sources of Indian history, including archaeological findings and historical texts.",
-    video: "/videos/indian%20history.mp4",
-  },
+    description: "A model demonstrating sources of Indian history, including archaeological findings and historical texts.",
+    video: "/videos/indian%20history.mp4"
+  }
 ];
 
-// ---- DOM Elements ----
+// DOM ELEMENTS
 
 const grid = document.getElementById("projectGrid");
 const tabs = document.getElementById("categoryTabs");
 
 let activeCategory = "all";
 
-// ---- Safe HTML ----
+// HTML ESCAPE
 
-function escapeHtml(str = "") {
+function escapeHtml(value = "") {
   const div = document.createElement("div");
-  div.textContent = str;
+  div.textContent = value;
   return div.innerHTML;
 }
 
-// ---- Render Projects ----
+// VIDEO URL
+
+function getVideoUrl(path) {
+  return new URL(path, window.location.origin).href;
+}
+
+// RENDER PROJECTS
 
 function render() {
   grid.innerHTML = "";
 
-  const visible = activeCategory === "all"
+  const visibleProjects = activeCategory === "all"
     ? projects
     : projects.filter(p => p.category === activeCategory);
 
-  visible.forEach((p, i) => {
-    const card = document.createElement("article");
+  visibleProjects.forEach((p, i) => {
 
+    const card = document.createElement("article");
     card.className = "card";
+
     card.style.setProperty(
       "--tilt",
       i % 2 === 0 ? "-0.6deg" : "0.6deg"
     );
 
     const video = document.createElement("video");
-    video.src = p.video;
+
+    video.src = getVideoUrl(p.video);
     video.muted = true;
     video.preload = "metadata";
     video.playsInline = true;
 
     video.addEventListener("error", () => {
-      console.error("Video failed to load:", p.video);
+      console.error("VIDEO ERROR:", video.currentSrc);
+      console.error("Error details:", video.error);
+
+      video.poster = "";
     });
 
     const body = document.createElement("div");
@@ -115,9 +124,10 @@ function render() {
   });
 }
 
-// ---- Category Tabs ----
+// CATEGORY FILTER
 
 tabs.addEventListener("click", (e) => {
+
   const btn = e.target.closest(".tab");
 
   if (!btn) return;
@@ -133,18 +143,21 @@ tabs.addEventListener("click", (e) => {
   render();
 });
 
-// ---- Detail Modal ----
+// DETAIL MODAL
 
 const detailBackdrop = document.getElementById("detailBackdrop");
 const detailVideo = document.getElementById("detailVideo");
+
 const detailTitle = document.getElementById("detailTitle");
 const detailStudent = document.getElementById("detailStudent");
 const detailDescription = document.getElementById("detailDescription");
 const detailCategory = document.getElementById("detailCategory");
 
 function openDetail(p) {
+
   detailVideo.pause();
-  detailVideo.src = p.video;
+
+  detailVideo.src = getVideoUrl(p.video);
   detailVideo.load();
 
   detailTitle.textContent = p.title;
@@ -156,6 +169,7 @@ function openDetail(p) {
 }
 
 function closeDetail() {
+
   detailBackdrop.classList.remove("open");
 
   detailVideo.pause();
@@ -166,13 +180,14 @@ function closeDetail() {
 document.getElementById("closeDetailBtn")
   .addEventListener("click", closeDetail);
 
-detailBackdrop.addEventListener("click", (e) => {
+detailBackdrop.addEventListener("click", e => {
+
   if (e.target === detailBackdrop) {
     closeDetail();
   }
 });
 
-// ---- Upload Modal ----
+// UPLOAD MODAL
 
 const modalBackdrop = document.getElementById("modalBackdrop");
 
@@ -186,16 +201,17 @@ document.getElementById("closeUploadBtn")
     modalBackdrop.classList.remove("open");
   });
 
-modalBackdrop.addEventListener("click", (e) => {
+modalBackdrop.addEventListener("click", e => {
+
   if (e.target === modalBackdrop) {
     modalBackdrop.classList.remove("open");
   }
 });
 
-// ---- Upload Preview (Temporary Only) ----
+// TEMPORARY VIDEO UPLOAD PREVIEW
 
 document.getElementById("uploadForm")
-  .addEventListener("submit", (e) => {
+  .addEventListener("submit", e => {
 
     e.preventDefault();
 
@@ -208,19 +224,18 @@ document.getElementById("uploadForm")
     }
 
     if (!file.type.startsWith("video/")) {
-      alert("Please select a valid video file.");
+      alert("Please select a valid video.");
       return;
     }
 
-    const videoURL = URL.createObjectURL(file);
+    const temporaryUrl = URL.createObjectURL(file);
 
     const newProject = {
       title: form.elements.title.value.trim(),
       student: form.elements.student.value.trim(),
       category: form.elements.category.value,
       description: form.elements.description.value.trim(),
-      video: videoURL,
-      temporary: true,
+      video: temporaryUrl
     };
 
     projects.unshift(newProject);
@@ -233,14 +248,17 @@ document.getElementById("uploadForm")
       t.classList.remove("active");
     });
 
-    tabs.querySelector('[data-category="all"]')
-      .classList.add("active");
+    const allTab = tabs.querySelector('[data-category="all"]');
+
+    if (allTab) {
+      allTab.classList.add("active");
+    }
 
     activeCategory = "all";
 
     render();
   });
 
-// ---- Initial Render ----
+// INITIALIZE
 
 render();
